@@ -106,7 +106,8 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table>\
+            var popupContent =
+             '<table>\
                     <tr>\
                         <th scope="row">name</th>\
                         <td>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
@@ -130,9 +131,6 @@
                     <tr>\
                         <th scope="row">email</th>\
                         <td>' + (feature.properties['email'] !== null ? autolinker.link(feature.properties['email'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['color code'] !== null ? autolinker.link(feature.properties['color code'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
