@@ -29,7 +29,18 @@
         <div>
             <input type="radio"  name="my_filter" value="ALL" checked>ALL
             <input type="radio"  name="my_filter" value="kisumu" >kisumu
-            <input type="radio"  name="my_filter" value="Siaya" >siaya
+            <input type="radio"  name="my_filter" value="Siaya" >Siaya
+            <input type="radio"  name="my_filter" value="Homabay" >Homabay
+            <input type="radio"  name="my_filter" value="Vihiga" >Vihiga
+            <input type="radio"  name="my_filter" value="Migori" >Migori
+        </div>
+
+        <div class="btn-group">
+            <button type="button" id="kisumu" class="btn btn-success">Kisumu</button>
+            <button type="button" id="siaya" class="btn btn-primary">Siaya</button>
+            <button type="button" id="homabay" class="btn btn-danger">Homabay</button>
+            <button type="button" id="migori" class="btn btn-danger">Migori</button>
+            <button type="button" id="vihiga" class="btn btn-danger">Vihiga</button>
         </div>
 
         
@@ -224,21 +235,128 @@
         //     }
         // });
 
-        var json_layer = new L.geoJSON.ajax('data/json_d.json', {
-            attribution: 'geomird',
-            interactive: true,
-            dataVar: 'json_vtc_01_1',
-            layerName: 'layer_vtc_01_1',
-            pane: 'pane_vtc_01_1',
-            onEachFeature: pop_vtc_01_1,
+        var promise = $.getJSON("data/json_d.json");
+        promise.then(function(data) {
+        var all_data = L.geoJson(data);
+                var kisumu = L.geoJson(data, {
+            filter: function(feature, layer) {
+                return feature.properties.county == "kisumu";
+            },
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
                 return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }, filter:filter_
-        }).addTo(map)
+            }
+        });
+        var Siaya = L.geoJson(data, {
+            filter: function(feature, layer) {
+                return feature.properties.county == "Siaya";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+        });
+
+        var homabay = L.geoJson(data, {
+            filter: function(feature, layer) {
+                return feature.properties.county == "Homabay";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+        });
+
+        var vihiga = L.geoJson(data, {
+            filter: function(feature, layer) {
+                return feature.properties.county == "Vihiga";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+        });
+
+        var migori = L.geoJson(data, {
+            filter: function(feature, layer) {
+                return feature.properties.county == "Migori";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+        });
+
+        map.fitBounds(all_data.getBounds(), {
+            padding: [50, 50]
+        });
+        kisumu.addTo(map)
+        Siaya.addTo(map)
+        homabay.addTo(map)
+        vihiga.addTo(map)
+        migori.addTo(map)
+        // The JavaScript below is new
+        $("#kisumu").click(function() {
+            map.addLayer(kisumu)
+            map.removeLayer(Siaya)
+            map.removeLayer(homabay)
+            map.removeLayer(vihiga)
+            map.removeLayer(migori)
+        });
+        $("#siaya").click(function() {
+            map.addLayer(Siaya)
+            map.removeLayer(kisumu)
+            map.removeLayer(homabay)
+            map.removeLayer(vihiga)
+            map.removeLayer(migori)
+        });
+        $("#homabay").click(function() {
+            map.addLayer(homabay)
+            map.removeLayer(kisumu)
+            map.removeLayer(siaya)
+            map.removeLayer(vihiga)
+            map.removeLayer(migori)
+        });
+
+        $("#migori").click(function() {
+            map.addLayer(migori)
+            map.removeLayer(kisumu)
+            map.removeLayer(homabay)
+            map.removeLayer(vihiga)
+            map.removeLayer(siaya)
+        });
+    });
+
+        // var json_layer = new L.geoJSON.ajax('data/json_d.json', {
+        //     attribution: 'geomird',
+        //     interactive: true,
+        //     dataVar: 'json_vtc_01_1',
+        //     layerName: 'layer_vtc_01_1',
+        //     pane: 'pane_vtc_01_1',
+        //     onEachFeature: pop_vtc_01_1,
+        //     pointToLayer: function (feature, latlng) {
+        //         var context = {
+        //             feature: feature,
+        //             variables: {}
+        //         };
+        //         return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+        //     }, filter:filter_
+        // }).addTo(map)
 
 
         var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
@@ -285,7 +403,7 @@
         });
 
         function filter_(json){
-            var att = json.properties;
+            var att = json.properties.county;
             // console.log(att)
             var optfilter = $("input[name= my_filter]:checked").val();
             console.log(optfilter)
@@ -293,8 +411,8 @@
                 return true;
             } else {
                 console.log(optfilter)
-                // return (att.status == optfilter);
-                return feature.properties.county == optfilter.toString();
+                return (att.status == optfilter);
+                // return feature.properties.county == optfilter.toString();
             }
         }
 

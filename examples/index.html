@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
 	<link rel="stylesheet" href="../assets/css/ready.css">
 	<link rel="stylesheet" href="../assets/css/demo.css">
+	<link rel="stylesheet" href="../css/base.css">
 	
 	<!-- my leaflet imports -->
 	<link rel="stylesheet" href="../css/leaflet.css">
@@ -21,7 +22,7 @@
 	<style>
         html, body, #map {
             width: 100%;
-            height: 75%;
+            height: 100%;
             padding: 0;
             margin: 0;
         }
@@ -153,7 +154,15 @@
 								</div>
 							</div>
 						</div>
-						<div class="input-group">
+						<div class="btn-group">
+							<button type="button" id="kisumu" class="btn btn-success">Kisumu</button>
+							<button type="button" id="siaya" class="btn btn-success">Siaya</button>
+							<button type="button" id="homabay" class="btn btn-success">Homabay</button>
+							<button type="button" id="migori" class="btn btn-success">Migori</button>
+							<button type="button" id="vihiga" class="btn btn-success">Vihiga</button>
+						</div>
+
+						<!-- <div class="input-group">
 							<input type="radio"  name="my_filter" value="ALL" checked>ALL
 							<input type="radio"  name="my_filter" value="kisumu" >kisumu
 							<input type="radio"  name="my_filter" value="Siaya" >siaya
@@ -164,7 +173,7 @@
 								  </div>
 								</div>
 								<input type="radio" class="form-control" aria-label="Text input with radio button">ALL
-							  </div>
+							  </div> -->
 
 							  <!-- <div class="input-group">
 								<div class="input-group-prepend">
@@ -295,8 +304,7 @@
 		var popupContent =
 		 '<table>\
 				<tr>\
-					<th scope="row">Image</th>\
-					<td><img class="card-img-top" src='+feature.properties['image_url1']+'> </td>\
+					<img class="card-img-top height:50px;" src='+feature.properties['image_url1']+'> \
 				</tr>\
 				<tr>\
 					<th scope="row">Name</th>\
@@ -407,34 +415,236 @@
 
 	// using ajax
 
-	var json_layer = new L.geoJSON.ajax('../data/json_d.json', {
-            attribution: 'geomird',
-            interactive: true,
-            // dataVar: 'json_vtc_01_1',
-            layerName: 'layer_vtc_01_1',
-            pane: 'pane_vtc_01_1',
-            onEachFeature: pop_vtc_01_1,
+	// var json_layer = new L.geoJSON.ajax('../data/json_d.json', {
+    //         attribution: 'geomird',
+    //         interactive: true,
+    //         // dataVar: 'json_vtc_01_1',
+    //         layerName: 'layer_vtc_01_1',
+    //         pane: 'pane_vtc_01_1',
+    //         onEachFeature: pop_vtc_01_1,
+    //         pointToLayer: function (feature, latlng) {
+    //             var context = {
+    //                 feature: feature,
+    //                 variables: {}
+    //             };
+    //             return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+    //         }, filter:filter_
+	// 	}).addTo(map)
+	// 	console.log(json_layer)
+
+
+	var promise = $.getJSON("../data/json_d.json");
+        promise.then(function(data) {
+        var all_data = L.geoJson(data, {
+			attribution: 'geomird',
+					interactive: true,
+					dataVar: 'json_vtc_01_1',
+					layerName: 'layer_vtc_01_1',
+					pane: 'pane_vtc_01_1',
+					onEachFeature: pop_vtc_01_1,
+					pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+		});
+                var kisumu = L.geoJson(data, {
+					attribution: 'geomird',
+					interactive: true,
+					// dataVar: 'json_vtc_01_1',
+					layerName: 'layer_vtc_01_1',
+					pane: 'pane_vtc_01_1',
+					onEachFeature: pop_vtc_01_1,
+            filter: function(feature, layer) {
+                return feature.properties.county == "kisumu";
+            },
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
                 return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }, filter:filter_
-		}).addTo(map)
-		console.log(json_layer)
+            }
+        });
+        var Siaya = L.geoJson(data, {
+			attribution: 'geomird',
+            interactive: true,
+            dataVar: 'json_vtc_01_1',
+            layerName: 'layer_vtc_01_1',
+            pane: 'pane_vtc_01_1',
+            onEachFeature: pop_vtc_01_1,
+            filter: function(feature, layer) {
+                return feature.properties.county == "Siaya";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+        });
 
-	// end of json layers
+        var homabay = L.geoJson(data, {
+			attribution: 'geomird',
+            interactive: true,
+            dataVar: 'json_vtc_01_1',
+            layerName: 'layer_vtc_01_1',
+            pane: 'pane_vtc_01_1',
+            onEachFeature: pop_vtc_01_1,
+            filter: function(feature, layer) {
+                return feature.properties.county == "Homabay";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+        });
 
-	// this is where our filter goes
+        var vihiga = L.geoJson(data, {
+			attribution: 'geomird',
+            interactive: true,
+            dataVar: 'json_vtc_01_1',
+            layerName: 'layer_vtc_01_1',
+            pane: 'pane_vtc_01_1',
+            onEachFeature: pop_vtc_01_1,
+            filter: function(feature, layer) {
+                return feature.properties.county == "Vihiga";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+        });
 
-	// end of filter
+        var migori = L.geoJson(data, {
+			attribution: 'geomird',
+            interactive: true,
+            dataVar: 'json_vtc_01_1',
+            layerName: 'layer_vtc_01_1',
+            pane: 'pane_vtc_01_1',
+            onEachFeature: pop_vtc_01_1,
+            filter: function(feature, layer) {
+                return feature.properties.county == "Migori";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+		});
+		
+		var vihiga = L.geoJson(data, {
+			attribution: 'geomird',
+            interactive: true,
+            dataVar: 'json_vtc_01_1',
+            layerName: 'layer_vtc_01_1',
+            pane: 'pane_vtc_01_1',
+            onEachFeature: pop_vtc_01_1,
+            filter: function(feature, layer) {
+                return feature.properties.county == "Migori";
+            },
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
+            }
+        });
 
-	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-		spiderfyDistanceMultiplier: 2});
-	cluster_vtc_01_1.addLayer(json_layer);
+        map.fitBounds(all_data.getBounds(), {
+            padding: [50, 50]
+		});
+		all_data.addTo(map)
+        // kisumu.addTo(map)
+        // Siaya.addTo(map)
+        // homabay.addTo(map)
+        // vihiga.addTo(map)
+        // migori.addTo(map)
+        // The JavaScript below is new
+        $("#kisumu").click(function() {
+            map.addLayer(kisumu)
+            map.removeLayer(Siaya)
+            map.removeLayer(homabay)
+            map.removeLayer(vihiga)
+			map.removeLayer(migori)
+			map.removeLayer(all_data)
+        });
+        $("#siaya").click(function() {
+            map.addLayer(Siaya)
+            map.removeLayer(kisumu)
+            map.removeLayer(homabay)
+            map.removeLayer(vihiga)
+            map.removeLayer(migori)
+        });
+        $("#homabay").click(function() {
+            map.addLayer(homabay)
+            map.removeLayer(kisumu)
+            map.removeLayer(siaya)
+            map.removeLayer(vihiga)
+            map.removeLayer(migori)
+        });
 
-	bounds_group.addLayer(json_layer);
+        $("#migori").click(function() {
+            map.addLayer(migori)
+            map.removeLayer(kisumu)
+            map.removeLayer(homabay)
+            map.removeLayer(vihiga)
+            map.removeLayer(siaya)
+		});
+		
+		$("#vihiga").click(function() {
+            map.addLayer(vihiga)
+            map.removeLayer(kisumu)
+            map.removeLayer(siaya)
+            map.removeLayer(homabay)
+            map.removeLayer(migori)
+		});
+		
+	// 	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+	// 	spiderfyDistanceMultiplier: 2});
+	// cluster_vtc_01_1.addLayer(all_data);
+
+	// bounds_group.addLayer(all_data);
+	// cluster_vtc_01_1.addTo(map);
+	var osmGeocoder = new L.Control.Geocoder({
+		collapsed: true,
+		position: 'topright',
+		text: 'Search',
+		title: 'Testing'
+	}).addTo(map);
+
+	// search controls
+	L.Control.search({
+	    data: items,
+	    // moveToLocation: function(latlng, title, map) {
+        // 	map.setView(latlng, 7);    // set the zoom
+    	// }
+	 }).addTo(map);
+    });
+
+	// end of json layers end end end end end end end end end end end end
+
+	
+
+
+
+	// var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+	// 	spiderfyDistanceMultiplier: 2});
+	// cluster_vtc_01_1.addLayer(all_data);
+
+	bounds_group.addLayer(all_data);
 	cluster_vtc_01_1.addTo(map);
 	var osmGeocoder = new L.Control.Geocoder({
 		collapsed: true,
@@ -460,7 +670,7 @@
 	L.control.layers(baseMaps,{'vtc_01<br /><table><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_qualifyingforsupport0.png" /></td><td>qualifying for support</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_needofsupportbuteliminated1.png" /></td><td>need of support but eliminated</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_nottobeconsideredforsupport2.png" /></td><td>not to be considered for support</td></tr></table>': cluster_vtc_01_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:true}).addTo(map);
 	setBounds();
 	var i = 0;
-	json_layer.eachLayer(function(layer) {
+	all_data.eachLayer(function(layer) {
 		var context = {
 			feature: layer.feature,
 			variables: {}
@@ -472,39 +682,50 @@
 		  addLabel(layer, i);
 		  i++;
 	});
-	resetLabels([json_layer]);
+	resetLabels([all_data]);
 	map.on("zoomend", function(){
-		resetLabels([json_layer]);
+		resetLabels([all_data]);
 	});
 	map.on("layeradd", function(){
-		resetLabels([json_layer]);
+		resetLabels([all_data]);
 	});
 	map.on("layerremove", function(){
-		resetLabels([json_layer]);
+		resetLabels([all_data]);
 	});
-	console.log(json_layer.features.length)
+	// console.log(json_layer.features.length)
 
 
 
 	function filter_(json){
-            var att = json.properties;
-            // console.log(att)
-            var optfilter = $("input[name= my_filter]:checked").val();
-            console.log(optfilter)
+            var att = json.properties.county;
+            console.log(att)
+			var optfilter = $("input[name=my_filter]:checked").val();
+
+			// console.log(optfilter)
             if (optfilter == 'ALL'){
-                return true;
-            } else {
-                console.log(optfilter)
-                // return (att.status == optfilter);
-                return feature.properties.county == optfilter.toString();
+				return true;
+			} 
+			if (optfilter == 'kisumu'){
+				return json.properties['county'] == kisumu;
+			}
+
+			else 
+			{
+                // console.log(optfilter)
+                return att.status == optfilter;
+                // return feature.properties.county == optfilter;
             }
         }
 
         $("input[name=my_filter]").click(function(){
             my_ids = [];
             json_layer.refresh();
-        });
-
+		});
+		
+		marker.on('click', function(ev){
+			var latlng = map.mouseEventToLatLng(ev.originalEvent);
+			console.log(latlng.lat + ', ' + latlng.lng);
+		});
 
 	// inserting sums into html
 	
