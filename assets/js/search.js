@@ -22,7 +22,7 @@ function SortCounties(a,b){
 
 L.Control.Search = L.Control.extend({
 	options: {
-		position: 'topleft',
+		position: 'topright',
 		placeholder: 'search .....',
 		hideMarkerOnCollapse: false,
 		marker: {						//custom L.Marker or false for hide
