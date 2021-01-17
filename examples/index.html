@@ -143,11 +143,12 @@
 									</div>
 									<div class="card-body">
 										<div class="btn-group">
-											<button type="button" id="kisumu" class="btn btn-success">Kisumu</button>
-											<button type="button" id="siaya" class="btn btn-success">Siaya</button>
-											<button type="button" id="homabay" class="btn btn-success">Homabay</button>
-											<button type="button" id="migori" class="btn btn-success">Migori</button>
-											<button type="button" id="vihiga" class="btn btn-success">Vihiga</button>
+											<button type="button" id="kisumu" class="btn btn-outline-primary">Kisumu</button>
+											<button type="button" id="siaya" class="btn btn-outline-secondary">Siaya</button>
+											<button type="button" id="homabay" class="btn btn-outline-success">Homabay</button>
+											<button type="button" id="migori" class="btn btn-outline-danger">Migori</button>
+											<button type="button" id="vihiga" class="btn btn-outline-warning">Vihiga</button>
+											<button type="button" id="all" class="btn btn-outline-info">All</button>
 										</div>
 										<div  id="map">
 											
@@ -454,7 +455,7 @@
                 var kisumu = L.geoJson(data, {
 					attribution: 'geomird',
 					interactive: true,
-					// dataVar: 'json_vtc_01_1',
+					dataVar: 'json_vtc_01_1',
 					layerName: 'layer_vtc_01_1',
 					pane: 'pane_vtc_01_1',
 					onEachFeature: pop_vtc_01_1,
@@ -576,7 +577,7 @@
         // The JavaScript below is new
         $("#kisumu").click(function() {
             map.addLayer(kisumu)
-            map.removeLayer(Siaya)
+            map.removeLayer(siaya)
             map.removeLayer(homabay)
             map.removeLayer(vihiga)
 			map.removeLayer(migori)
@@ -616,6 +617,15 @@
 			map.removeLayer(migori)
 			map.removeLayer(all_data)
 		});
+
+		$("#all").click(function() {
+            map.addLayer(all_data)
+            // map.removeLayer(kisumu)
+            // map.removeLayer(siaya)
+            // map.removeLayer(homabay)
+			// map.removeLayer(migori)
+			// map.removeLayer(all_data)
+		});
 		
 	// 	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
 	// 	spiderfyDistanceMultiplier: 2});
@@ -637,18 +647,16 @@
         // 	map.setView(latlng, 7);    // set the zoom
     	// }
 	 }).addTo(map);
-    });
-
-	// end of json layers end end end end end end end end end end end end
-
-	
 
 
 
-	// var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-	// 	spiderfyDistanceMultiplier: 2});
+	//  modification
+
+	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+		spiderfyDistanceMultiplier: 2});
 	// cluster_vtc_01_1.addLayer(all_data);
 
+	 
 	bounds_group.addLayer(all_data);
 	cluster_vtc_01_1.addTo(map);
 	var osmGeocoder = new L.Control.Geocoder({
@@ -657,15 +665,6 @@
 		text: 'Search',
 		title: 'Testing'
 	}).addTo(map);
-
-	// search controls
-	L.Control.search({
-	    data: items,
-	    // moveToLocation: function(latlng, title, map) {
-        // 	map.setView(latlng, 7);    // set the zoom
-    	// }
-	 }).addTo(map);
-
 
 	document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
 	.className += ' fa fa-search';
@@ -697,40 +696,97 @@
 	map.on("layerremove", function(){
 		resetLabels([all_data]);
 	});
-	// console.log(json_layer.features.length)
 
 
 
-	function filter_(json){
-            var att = json.properties.county;
-            console.log(att)
-			var optfilter = $("input[name=my_filter]:checked").val();
+    });
 
-			// console.log(optfilter)
-            if (optfilter == 'ALL'){
-				return true;
-			} 
-			if (optfilter == 'kisumu'){
-				return json.properties['county'] == kisumu;
-			}
+	// end of json layers end end end end end end end end end end end end
 
-			else 
-			{
-                // console.log(optfilter)
-                return att.status == optfilter;
-                // return feature.properties.county == optfilter;
-            }
-        }
+	
 
-        $("input[name=my_filter]").click(function(){
-            my_ids = [];
-            json_layer.refresh();
-		});
+
+
+	// var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+	// 	spiderfyDistanceMultiplier: 2});
+	// cluster_vtc_01_1.addLayer(all_data);
+
+	// bounds_group.addLayer(all_data);
+	// cluster_vtc_01_1.addTo(map);
+	// var osmGeocoder = new L.Control.Geocoder({
+	// 	collapsed: true,
+	// 	position: 'topright',
+	// 	text: 'Search',
+	// 	title: 'Testing'
+	// }).addTo(map);
+
+
+
+
+	// document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+	// .className += ' fa fa-search';
+	// document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+	// .title += 'Search for a place';
+	// var baseMaps = {};
+	// L.control.layers(baseMaps,{'vtc_01<br /><table><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_qualifyingforsupport0.png" /></td><td>qualifying for support</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_needofsupportbuteliminated1.png" /></td><td>need of support but eliminated</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_nottobeconsideredforsupport2.png" /></td><td>not to be considered for support</td></tr></table>': cluster_vtc_01_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:true}).addTo(map);
+	// setBounds();
+	// var i = 0;
+	// all_data.eachLayer(function(layer) {
+	// 	var context = {
+	// 		feature: layer.feature,
+	// 		variables: {}
+	// 	};
+	// 	layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Chilanka\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_vtc_01_1'});
+	// 	labels.push(layer);
+	// 	totalMarkers += 1;
+	// 	  layer.added = true;
+	// 	  addLabel(layer, i);
+	// 	  i++;
+	// });
+	// resetLabels([all_data]);
+	// map.on("zoomend", function(){
+	// 	resetLabels([all_data]);
+	// });
+	// map.on("layeradd", function(){
+	// 	resetLabels([all_data]);
+	// });
+	// map.on("layerremove", function(){
+	// 	resetLabels([all_data]);
+	// });
+	// // console.log(json_layer.features.length)
+
+
+
+	// function filter_(json){
+    //         var att = json.properties.county;
+    //         console.log(att)
+	// 		var optfilter = $("input[name=my_filter]:checked").val();
+
+	// 		// console.log(optfilter)
+    //         if (optfilter == 'ALL'){
+	// 			return true;
+	// 		} 
+	// 		if (optfilter == 'kisumu'){
+	// 			return json.properties['county'] == kisumu;
+	// 		}
+
+	// 		else 
+	// 		{
+    //             // console.log(optfilter)
+    //             return att.status == optfilter;
+    //             // return feature.properties.county == optfilter;
+    //         }
+    //     }
+
+    //     $("input[name=my_filter]").click(function(){
+    //         my_ids = [];
+    //         json_layer.refresh();
+	// 	});
 		
-		marker.on('click', function(ev){
-			var latlng = map.mouseEventToLatLng(ev.originalEvent);
-			console.log(latlng.lat + ', ' + latlng.lng);
-		});
+	// 	marker.on('click', function(ev){
+	// 		var latlng = map.mouseEventToLatLng(ev.originalEvent);
+	// 		console.log(latlng.lat + ', ' + latlng.lng);
+	// 	});
 
 	// inserting sums into html
 	
