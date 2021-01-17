@@ -30,9 +30,9 @@
 
 </head>
 <body>
-	<div class="wrapper">
-		<div class="main-header">
-			<div class="logo-header">
+	<!-- <div class="wrapper"> -->
+		<!-- <div class="main-header"> -->
+			<!-- <div class="logo-header">
 				<a href="index.html" class="logo">
 					Mapping VTC
 				</a>
@@ -41,7 +41,7 @@
 				</button>
 				<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
 			</div>
-			
+			 -->
 			</div>
 			<!-- <div class="sidebar"> -->
 				<!-- <div class="scrollbar-inner sidebar-wrapper"> -->
@@ -69,7 +69,7 @@
 				<!-- </div> -->
 			<!-- </div> -->
 			
-			<div class="main-panel">
+			<!-- <div class="main-panel"> -->
 				<div class="content">
 					<div class="container-fluid">
 						<h4 class="page-title">Dashboard</h4>
@@ -207,9 +207,9 @@
 						</div>				
 					</div>
 				</footer>
-			</div>
-		</div>
-	</div>
+			<!-- </div> -->
+		<!-- </div> -->
+	<!-- </div> -->
 	<script src="../assets/js/underscore-min.js"></script>
 	<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
 	<script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
@@ -620,11 +620,11 @@
 
 		$("#all").click(function() {
             map.addLayer(all_data)
-            // map.removeLayer(kisumu)
-            // map.removeLayer(siaya)
-            // map.removeLayer(homabay)
-			// map.removeLayer(migori)
-			// map.removeLayer(all_data)
+            map.removeLayer(kisumu)
+            map.removeLayer(siaya)
+            map.removeLayer(homabay)
+			map.removeLayer(migori)
+			map.removeLayer(vihiga)
 		});
 		
 	// 	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
@@ -633,12 +633,12 @@
 
 	// bounds_group.addLayer(all_data);
 	// cluster_vtc_01_1.addTo(map);
-	var osmGeocoder = new L.Control.Geocoder({
-		collapsed: true,
-		position: 'topright',
-		text: 'Search',
-		title: 'Testing'
-	}).addTo(map);
+	// var osmGeocoder = new L.Control.Geocoder({
+	// 	collapsed: true,
+	// 	position: 'topright',
+	// 	text: 'Search',
+	// 	title: 'Testing'
+	// }).addTo(map);
 
 	// search controls
 	L.Control.search({
