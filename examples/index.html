@@ -43,9 +43,9 @@
 			</div>
 			
 			</div>
-			<div class="sidebar">
-				<div class="scrollbar-inner sidebar-wrapper">
-					<ul class="nav">
+			<!-- <div class="sidebar"> -->
+				<!-- <div class="scrollbar-inner sidebar-wrapper"> -->
+					<!-- <ul class="nav"> -->
 						
 
 						<!-- our toggle buttons -->
@@ -65,9 +65,9 @@
 							</a>
 						</li> -->
 						
-					</ul>
-				</div>
-			</div>
+					<!-- </ul> -->
+				<!-- </div> -->
+			<!-- </div> -->
 			
 			<div class="main-panel">
 				<div class="content">
@@ -142,6 +142,13 @@
 										Distribution of Vocational Training Centers</p>
 									</div>
 									<div class="card-body">
+										<div class="btn-group">
+											<button type="button" id="kisumu" class="btn btn-success">Kisumu</button>
+											<button type="button" id="siaya" class="btn btn-success">Siaya</button>
+											<button type="button" id="homabay" class="btn btn-success">Homabay</button>
+											<button type="button" id="migori" class="btn btn-success">Migori</button>
+											<button type="button" id="vihiga" class="btn btn-success">Vihiga</button>
+										</div>
 										<div  id="map">
 											
 											<div class="map" style="height: 600px;">
@@ -154,13 +161,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="btn-group">
-							<button type="button" id="kisumu" class="btn btn-success">Kisumu</button>
-							<button type="button" id="siaya" class="btn btn-success">Siaya</button>
-							<button type="button" id="homabay" class="btn btn-success">Homabay</button>
-							<button type="button" id="migori" class="btn btn-success">Migori</button>
-							<button type="button" id="vihiga" class="btn btn-success">Vihiga</button>
-						</div>
+
 
 						<!-- <div class="input-group">
 							<input type="radio"  name="my_filter" value="ALL" checked>ALL
@@ -506,7 +507,7 @@
             }
         });
 
-        var vihiga = L.geoJson(data, {
+        var siaya = L.geoJson(data, {
 			attribution: 'geomird',
             interactive: true,
             dataVar: 'json_vtc_01_1',
@@ -514,7 +515,7 @@
             pane: 'pane_vtc_01_1',
             onEachFeature: pop_vtc_01_1,
             filter: function(feature, layer) {
-                return feature.properties.county == "Vihiga";
+                return feature.properties.county == "Siaya";
             },
             pointToLayer: function (feature, latlng) {
                 var context = {
@@ -552,7 +553,7 @@
             pane: 'pane_vtc_01_1',
             onEachFeature: pop_vtc_01_1,
             filter: function(feature, layer) {
-                return feature.properties.county == "Migori";
+                return feature.properties.county == "Vihiga";
             },
             pointToLayer: function (feature, latlng) {
                 var context = {
@@ -582,18 +583,20 @@
 			map.removeLayer(all_data)
         });
         $("#siaya").click(function() {
-            map.addLayer(Siaya)
+            map.addLayer(siaya)
             map.removeLayer(kisumu)
             map.removeLayer(homabay)
             map.removeLayer(vihiga)
-            map.removeLayer(migori)
+			map.removeLayer(migori)
+			map.removeLayer(all_data)
         });
         $("#homabay").click(function() {
             map.addLayer(homabay)
             map.removeLayer(kisumu)
             map.removeLayer(siaya)
             map.removeLayer(vihiga)
-            map.removeLayer(migori)
+			map.removeLayer(migori)
+			map.removeLayer(all_data)
         });
 
         $("#migori").click(function() {
@@ -601,7 +604,8 @@
             map.removeLayer(kisumu)
             map.removeLayer(homabay)
             map.removeLayer(vihiga)
-            map.removeLayer(siaya)
+			map.removeLayer(siaya)
+			map.removeLayer(all_data)
 		});
 		
 		$("#vihiga").click(function() {
@@ -609,7 +613,8 @@
             map.removeLayer(kisumu)
             map.removeLayer(siaya)
             map.removeLayer(homabay)
-            map.removeLayer(migori)
+			map.removeLayer(migori)
+			map.removeLayer(all_data)
 		});
 		
 	// 	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
