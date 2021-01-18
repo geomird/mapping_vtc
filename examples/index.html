@@ -286,7 +286,7 @@
 	map.addLayer(layer_OpenStreetMap_0);
 	function pop_vtc_01_1(feature, layer) {
 		items.push(layer);
-		console.log(items);
+	
 		layer.on({
 			mouseout: function(e) {
 				for (i in e.target._eventParents) {
@@ -458,7 +458,7 @@
 					dataVar: 'json_vtc_01_1',
 					layerName: 'layer_vtc_01_1',
 					pane: 'pane_vtc_01_1',
-					onEachFeature: pop_vtc_01_1,
+					// onEachFeature: pop_vtc_01_1,
             filter: function(feature, layer) {
                 return feature.properties.county == "kisumu";
             },
@@ -476,7 +476,7 @@
             dataVar: 'json_vtc_01_1',
             layerName: 'layer_vtc_01_1',
             pane: 'pane_vtc_01_1',
-            onEachFeature: pop_vtc_01_1,
+            // onEachFeature: pop_vtc_01_1,
             filter: function(feature, layer) {
                 return feature.properties.county == "Siaya";
             },
@@ -495,7 +495,7 @@
             dataVar: 'json_vtc_01_1',
             layerName: 'layer_vtc_01_1',
             pane: 'pane_vtc_01_1',
-            onEachFeature: pop_vtc_01_1,
+            // onEachFeature: pop_vtc_01_1,
             filter: function(feature, layer) {
                 return feature.properties.county == "Homabay";
             },
@@ -514,7 +514,7 @@
             dataVar: 'json_vtc_01_1',
             layerName: 'layer_vtc_01_1',
             pane: 'pane_vtc_01_1',
-            onEachFeature: pop_vtc_01_1,
+            // onEachFeature: pop_vtc_01_1,
             filter: function(feature, layer) {
                 return feature.properties.county == "Siaya";
             },
@@ -533,7 +533,7 @@
             dataVar: 'json_vtc_01_1',
             layerName: 'layer_vtc_01_1',
             pane: 'pane_vtc_01_1',
-            onEachFeature: pop_vtc_01_1,
+            // onEachFeature: pop_vtc_01_1,
             filter: function(feature, layer) {
                 return feature.properties.county == "Migori";
             },
@@ -552,7 +552,7 @@
             dataVar: 'json_vtc_01_1',
             layerName: 'layer_vtc_01_1',
             pane: 'pane_vtc_01_1',
-            onEachFeature: pop_vtc_01_1,
+            // onEachFeature: pop_vtc_01_1,
             filter: function(feature, layer) {
                 return feature.properties.county == "Vihiga";
             },
