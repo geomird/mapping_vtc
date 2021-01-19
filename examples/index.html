@@ -140,51 +140,16 @@
 										<h4 class="card-title">Western Region</h4>
 										<p class="card-category">
 										Distribution of Vocational Training Centers</p>
-									</div>
-									<div class="card-body">
-										<div class="btn-group">
-											<button type="button" id="kisumu" class="btn btn-outline-primary">Kisumu</button>
-											<button type="button" id="siaya" class="btn btn-outline-secondary">Siaya</button>
-											<button type="button" id="homabay" class="btn btn-outline-success">Homabay</button>
-											<button type="button" id="migori" class="btn btn-outline-danger">Migori</button>
-											<button type="button" id="vihiga" class="btn btn-outline-warning">Vihiga</button>
-											<button type="button" id="all" class="btn btn-outline-info">All</button>
-										</div>
+									<!-- </div> -->
 										<div  id="map">
-											
-											<div class="map" style="height: 600px;">
+											<div class="map" style="height: 500px;">
 												<span>Alternative content for the map</span>
-												
 											</div>
-											
 										</div>
-									</div>
+									<!-- </div> -->
 								</div>
 							</div>
 						</div>
-
-
-						<!-- <div class="input-group">
-							<input type="radio"  name="my_filter" value="ALL" checked>ALL
-							<input type="radio"  name="my_filter" value="kisumu" >kisumu
-							<input type="radio"  name="my_filter" value="Siaya" >siaya
-							<div class="input-group">
-								<div class="input-group-prepend">
-								  <div class="input-group-text">
-								  <input type="radio" aria-label="Radio button for following text input">
-								  </div>
-								</div>
-								<input type="radio" class="form-control" aria-label="Text input with radio button">ALL
-							  </div> -->
-
-							  <!-- <div class="input-group">
-								<div class="input-group-prepend">
-								  <div class="input-group-text">
-								  <input type="radio" aria-label="Radio button for following text input">
-								  </div>
-								</div>
-								<input type="radio" name="my_filter" value="kisumu" aria-label="Text input with radio button">kisumu
-							  </div> -->
 						</div>
 						
 						
@@ -195,7 +160,7 @@
 						<nav class="pull-left">
 							<ul class="nav">
 								<li class="nav-item">
-									<a class="nav-link" href="http://geomird.co.ke">
+									<a class="nav-link" href="https://geomird.co.ke">
 										geomird
 									</a>
 								</li>
@@ -210,30 +175,24 @@
 			<!-- </div> -->
 		<!-- </div> -->
 	<!-- </div> -->
-	<script src="../assets/js/underscore-min.js"></script>
-	<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script src="../js/qgis2web_expressions.js"></script>
-	<script src="../js/leaflet.js"></script>
-	<script src="../js/leaflet-svg-shape-markers.min.js"></script>
-	<script src="../js/leaflet.rotatedMarker.js"></script>
-	<script src="../js/leaflet.pattern.js"></script>
-	<script src="../js/leaflet-hash.js"></script>
-	<script src="../js/Autolinker.min.js"></script>
-	<script src="../js/rbush.min.js"></script>
-	<script src="../js/labelgun.min.js"></script>
-	<script src="../js/labels.js"></script>
-	<script src="../js/leaflet-control-geocoder.Geocoder.js"></script>
-	<script src="../js/leaflet-measure.js"></script>
-	<script src="../js/leaflet.markercluster.js"></script>
-	<script src="../js/leaflet.ajax.min.js"></script>
-    <script src="../js/leaflet.ajax.js"></script>
-     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-     <script src="../js/leaflet.ajax.js"></script>
-	<script src="../data/vtc_01_1.js"></script>
-	<script src="../assets/js/search.js"></script>
+	<script src="js/qgis2web_expressions.js"></script>
+	<script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+	<script src="js/leaflet.rotatedMarker.js"></script>
+	<script src="js/leaflet.pattern.js"></script>
+	<script src="js/leaflet-hash.js"></script>
+	<script src="js/Autolinker.min.js"></script>
+	<script src="js/rbush.min.js"></script>
+	<script src="js/labelgun.min.js"></script>
+	<script src="js/labels.js"></script>
+	<script src="js/leaflet-control-geocoder.Geocoder.js"></script>
+	<script src="js/leaflet-measure.js"></script>
+	<script src="js/leaflet-search.js"></script>
+	<script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+	<script src="data/vtc_03_1.js"></script>
+	<script src="data/counties_2.js"></script>
 	<script>
-	var items = [];
 	var highlightLayer;
 	function highlightFeature(e) {
 		highlightLayer = e.target;
@@ -252,10 +211,11 @@
 	}
 	var map = L.map('map', {
 		zoomControl:true, maxZoom:28, minZoom:1
-	}).fitBounds([[-0.5202839593750064,33.501681374479155],[0.5646410385416714,34.97832787447917]]);
+	})
 	var hash = new L.Hash(map);
 	map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
 	var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+	L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
 	var measureControl = new L.Control.Measure({
 		position: 'topleft',
 		primaryLengthUnit: 'meters',
@@ -270,6 +230,9 @@
 	.className += ' fas fa-ruler';
 	var bounds_group = new L.featureGroup([]);
 	function setBounds() {
+		if (bounds_group.getLayers().length) {
+			map.fitBounds(bounds_group.getBounds());
+		}
 	}
 	map.createPane('pane_OpenStreetMap_0');
 	map.getPane('pane_OpenStreetMap_0').style.zIndex = 400;
@@ -284,9 +247,7 @@
 	});
 	layer_OpenStreetMap_0;
 	map.addLayer(layer_OpenStreetMap_0);
-	function pop_vtc_01_1(feature, layer) {
-		items.push(layer);
-	
+	function pop_vtc_03_1(feature, layer) {
 		layer.on({
 			mouseout: function(e) {
 				for (i in e.target._eventParents) {
@@ -302,22 +263,16 @@
 			},
 			mouseover: highlightFeature,
 		});
-		// <img src='"+entry[0]+"&previewImage=true'</img>
-		var popupContent =
-		 '<table>\
-				<tr>\
+		var popupContent = '<table>\
+			<tr>\
 					<img class="card-img-top" windth=100% height="200px" src='+feature.properties['image_url1']+'> \
 				</tr>\
 				<tr>\
-					<th scope="row">Name</th>\
-					<td>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
-				</tr>\
-				<tr>\
-					<th scope="row">County</th>\
+					<th scope="row">county</th>\
 					<td>' + (feature.properties['county'] !== null ? autolinker.link(feature.properties['county'].toLocaleString()) : '') + '</td>\
 				</tr>\
 				<tr>\
-					<th scope="row">Contact <br> person</th>\
+					<th scope="row">contact <br>person</th>\
 					<td>' + (feature.properties['contact pe'] !== null ? autolinker.link(feature.properties['contact pe'].toLocaleString()) : '') + '</td>\
 				</tr>\
 				<tr>\
@@ -325,24 +280,23 @@
 					<td>' + (feature.properties['rank'] !== null ? autolinker.link(feature.properties['rank'].toLocaleString()) : '') + '</td>\
 				</tr>\
 				<tr>\
-					<th scope="row">Phone</th>\
+					<th scope="row">phone</th>\
 					<td>' + (feature.properties['phone'] !== null ? autolinker.link(feature.properties['phone'].toLocaleString()) : '') + '</td>\
 				</tr>\
 				<tr>\
-					<th scope="row">Email</th>\
+					<th scope="row">email</th>\
 					<td>' + (feature.properties['email'] !== null ? autolinker.link(feature.properties['email'].toLocaleString()) : '') + '</td>\
 				</tr>\
 			</table>';
 		layer.bindPopup(popupContent, {maxHeight: 400});
 	}
 
-	function style_vtc_01_1_0(feature) {
+	function style_vtc_03_1_0(feature) {
 		switch(String(feature.properties['color code'])) {
 			case 'green':
 				return {
-			pane: 'pane_vtc_01_1',
-			shape: 'diamond',
-			radius: 8.8,
+			pane: 'pane_vtc_03_1',
+			radius: 5.6,
 			opacity: 1,
 			color: 'rgba(61,128,53,1.0)',
 			dashArray: '',
@@ -357,9 +311,8 @@
 				break;
 			case 'orange':
 				return {
-			pane: 'pane_vtc_01_1',
-			shape: 'circle',
-			radius: 8.0,
+			pane: 'pane_vtc_03_1',
+			radius: 5.6,
 			opacity: 1,
 			color: 'rgba(179,92,21,1.0)',
 			dashArray: '',
@@ -374,9 +327,8 @@
 				break;
 			case 'red':
 				return {
-			pane: 'pane_vtc_01_1',
-			shape: 'diamond',
-			radius: 8.8,
+			pane: 'pane_vtc_03_1',
+			radius: 5.6,
 			opacity: 1,
 			color: 'rgba(128,17,25,1.0)',
 			dashArray: '',
@@ -390,406 +342,246 @@
 		}
 				break;
 		}
-	
 	}
-	map.createPane('pane_vtc_01_1');
-	map.getPane('pane_vtc_01_1').style.zIndex = 401;
-	map.getPane('pane_vtc_01_1').style['mix-blend-mode'] = 'normal';
-
-
-	// data is loaded at this point
-
-	// var layer_vtc_01_1 = new L.geoJson(json_vtc_01_1, {
-	// 	attribution: '',
-	// 	interactive: true,
-	// 	dataVar: 'json_vtc_01_1',
-	// 	layerName: 'layer_vtc_01_1',
-	// 	pane: 'pane_vtc_01_1',
-	// 	onEachFeature: pop_vtc_01_1,
-	// 	pointToLayer: function (feature, latlng) {
-	// 		var context = {
-	// 			feature: feature,
-	// 			variables: {}
-	// 		};
-	// 		return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-	// 	},
-	// });
-
-	// using ajax
-
-	// var json_layer = new L.geoJSON.ajax('../data/county.geojson', {
-    //         attribution: 'geomird',
-    //         interactive: true,
-            // dataVar: 'json_vtc_01_1',
-            // layerName: 'layer_vtc_01_1',
-            // pane: 'pane_vtc_01_1',
-            // onEachFeature: pop_vtc_01_1,
-            // pointToLayer: function (feature, latlng) {
-            //     var context = {
-            //         feature: feature,
-            //         variables: {}
-            //     };
-            //     return L.shapeMarker(latlng, );
-            // }
-		// }).addTo(map)
-	// 	console.log(json_layer)
-
-
-	var promise = $.getJSON("../data/json_d.json");
-        promise.then(function(data) {
-        var all_data = L.geoJson(data, {
-			attribution: 'geomird',
-					interactive: true,
-					dataVar: 'json_vtc_01_1',
-					layerName: 'layer_vtc_01_1',
-					pane: 'pane_vtc_01_1',
-					onEachFeature: pop_vtc_01_1,
-					pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }
+	map.createPane('pane_vtc_03_1');
+	map.getPane('pane_vtc_03_1').style.zIndex = 401;
+	map.getPane('pane_vtc_03_1').style['mix-blend-mode'] = 'normal';
+	var layer_vtc_03_1 = new L.geoJson(json_vtc_03_1, {
+		attribution: '',
+		interactive: true,
+		dataVar: 'json_vtc_03_1',
+		layerName: 'layer_vtc_03_1',
+		pane: 'pane_vtc_03_1',
+		onEachFeature: pop_vtc_03_1,
+		pointToLayer: function (feature, latlng) {
+			var context = {
+				feature: feature,
+				variables: {}
+			};
+			return L.circleMarker(latlng, style_vtc_03_1_0(feature));
+		},
+	});
+	bounds_group.addLayer(layer_vtc_03_1);
+	map.addLayer(layer_vtc_03_1);
+	function pop_counties_2(feature, layer) {
+		layer.on({
+			mouseout: function(e) {
+				for (i in e.target._eventParents) {
+					e.target._eventParents[i].resetStyle(e.target);
+				}
+				if (typeof layer.closePopup == 'function') {
+					layer.closePopup();
+				} else {
+					layer.eachLayer(function(feature){
+						feature.closePopup()
+					});
+				}
+			},
+			mouseover: highlightFeature,
 		});
-                var kisumu = L.geoJson(data, {
-					attribution: 'geomird',
-					interactive: true,
-					dataVar: 'json_vtc_01_1',
-					layerName: 'layer_vtc_01_1',
-					pane: 'pane_vtc_01_1',
-					// onEachFeature: pop_vtc_01_1,
-            filter: function(feature, layer) {
-                return feature.properties.county == "kisumu";
-            },
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }
-        });
-        var Siaya = L.geoJson(data, {
-			attribution: 'geomird',
-            interactive: true,
-            dataVar: 'json_vtc_01_1',
-            layerName: 'layer_vtc_01_1',
-            pane: 'pane_vtc_01_1',
-            // onEachFeature: pop_vtc_01_1,
-            filter: function(feature, layer) {
-                return feature.properties.county == "Siaya";
-            },
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }
-        });
+		var popupContent = '<table>\
+				<tr>\
+					<td colspan="2">' + (feature.properties['OBJECTID'] !== null ? autolinker.link(feature.properties['OBJECTID'].toLocaleString()) : '') + '</td>\
+				</tr>\
+				<tr>\
+					<td colspan="2">' + (feature.properties['COUNTY'] !== null ? autolinker.link(feature.properties['COUNTY'].toLocaleString()) : '') + '</td>\
+				</tr>\
+			</table>';
+		layer.bindPopup(popupContent, {maxHeight: 400});
+	}
 
-        var homabay = L.geoJson(data, {
-			attribution: 'geomird',
-            interactive: true,
-            dataVar: 'json_vtc_01_1',
-            layerName: 'layer_vtc_01_1',
-            pane: 'pane_vtc_01_1',
-            // onEachFeature: pop_vtc_01_1,
-            filter: function(feature, layer) {
-                return feature.properties.county == "Homabay";
-            },
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }
-        });
-
-        var siaya = L.geoJson(data, {
-			attribution: 'geomird',
-            interactive: true,
-            dataVar: 'json_vtc_01_1',
-            layerName: 'layer_vtc_01_1',
-            pane: 'pane_vtc_01_1',
-            // onEachFeature: pop_vtc_01_1,
-            filter: function(feature, layer) {
-                return feature.properties.county == "Siaya";
-            },
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }
-        });
-
-        var migori = L.geoJson(data, {
-			attribution: 'geomird',
-            interactive: true,
-            dataVar: 'json_vtc_01_1',
-            layerName: 'layer_vtc_01_1',
-            pane: 'pane_vtc_01_1',
-            // onEachFeature: pop_vtc_01_1,
-            filter: function(feature, layer) {
-                return feature.properties.county == "Migori";
-            },
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }
-		});
-		
-		var vihiga = L.geoJson(data, {
-			attribution: 'geomird',
-            interactive: true,
-            dataVar: 'json_vtc_01_1',
-            layerName: 'layer_vtc_01_1',
-            pane: 'pane_vtc_01_1',
-            // onEachFeature: pop_vtc_01_1,
-            filter: function(feature, layer) {
-                return feature.properties.county == "Vihiga";
-            },
-            pointToLayer: function (feature, latlng) {
-                var context = {
-                    feature: feature,
-                    variables: {}
-                };
-                return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-            }
-        });
-
-        map.fitBounds(all_data.getBounds(), {
-            padding: [50, 50]
-		});
-		all_data.addTo(map)
-        // kisumu.addTo(map)
-        // Siaya.addTo(map)
-        // homabay.addTo(map)
-        // vihiga.addTo(map)
-        // migori.addTo(map)
-        // The JavaScript below is new
-        $("#kisumu").click(function() {
-            map.addLayer(kisumu)
-            map.removeLayer(siaya)
-            map.removeLayer(homabay)
-            map.removeLayer(vihiga)
-			map.removeLayer(migori)
-			map.removeLayer(all_data)
-        });
-        $("#siaya").click(function() {
-            map.addLayer(siaya)
-            map.removeLayer(kisumu)
-            map.removeLayer(homabay)
-            map.removeLayer(vihiga)
-			map.removeLayer(migori)
-			map.removeLayer(all_data)
-        });
-        $("#homabay").click(function() {
-            map.addLayer(homabay)
-            map.removeLayer(kisumu)
-            map.removeLayer(siaya)
-            map.removeLayer(vihiga)
-			map.removeLayer(migori)
-			map.removeLayer(all_data)
-        });
-
-        $("#migori").click(function() {
-            map.addLayer(migori)
-            map.removeLayer(kisumu)
-            map.removeLayer(homabay)
-            map.removeLayer(vihiga)
-			map.removeLayer(siaya)
-			map.removeLayer(all_data)
-		});
-		
-		$("#vihiga").click(function() {
-            map.addLayer(vihiga)
-            map.removeLayer(kisumu)
-            map.removeLayer(siaya)
-            map.removeLayer(homabay)
-			map.removeLayer(migori)
-			map.removeLayer(all_data)
-		});
-
-		$("#all").click(function() {
-            map.addLayer(all_data)
-            map.removeLayer(kisumu)
-            map.removeLayer(siaya)
-            map.removeLayer(homabay)
-			map.removeLayer(migori)
-			map.removeLayer(vihiga)
-		});
-		
-	// 	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-	// 	spiderfyDistanceMultiplier: 2});
-	// cluster_vtc_01_1.addLayer(all_data);
-
-	// bounds_group.addLayer(all_data);
-	// cluster_vtc_01_1.addTo(map);
-	// var osmGeocoder = new L.Control.Geocoder({
-	// 	collapsed: true,
-	// 	position: 'topright',
-	// 	text: 'Search',
-	// 	title: 'Testing'
-	// }).addTo(map);
-
-	// search controls
-	L.Control.search({
-	    data: items,
-	    // moveToLocation: function(latlng, title, map) {
-        // 	map.setView(latlng, 7);    // set the zoom
-    	// }
-	 }).addTo(map);
-
-
-
-	//  modification
-
-	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-		spiderfyDistanceMultiplier: 2});
-	// cluster_vtc_01_1.addLayer(all_data);
-
-	 
-	bounds_group.addLayer(all_data);
-	cluster_vtc_01_1.addTo(map);
+	function style_counties_2_0() {
+		return {
+			pane: 'pane_counties_2',
+			opacity: 1,
+			color: 'rgba(188,35,35,1.0)',
+			dashArray: '',
+			lineCap: 'butt',
+			lineJoin: 'miter',
+			weight: 1.0, 
+			fill: true,
+			fillOpacity: 1,
+			fillColor: 'rgba(213,180,60,0.0)',
+			interactive: false,
+		}
+	}
+	map.createPane('pane_counties_2');
+	map.getPane('pane_counties_2').style.zIndex = 402;
+	map.getPane('pane_counties_2').style['mix-blend-mode'] = 'normal';
+	var layer_counties_2 = new L.geoJson(json_counties_2, {
+		attribution: '',
+		interactive: false,
+		dataVar: 'json_counties_2',
+		layerName: 'layer_counties_2',
+		pane: 'pane_counties_2',
+		onEachFeature: pop_counties_2,
+		style: style_counties_2_0,
+	});
+	bounds_group.addLayer(layer_counties_2);
+	map.addLayer(layer_counties_2);
 	var osmGeocoder = new L.Control.Geocoder({
 		collapsed: true,
-		position: 'topright',
+		position: 'topleft',
 		text: 'Search',
 		title: 'Testing'
 	}).addTo(map);
-
 	document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
 	.className += ' fa fa-search';
 	document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
 	.title += 'Search for a place';
 	var baseMaps = {};
-	L.control.layers(baseMaps,{'vtc_01<br /><table><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_qualifyingforsupport0.png" /></td><td>qualifying for support</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_needofsupportbuteliminated1.png" /></td><td>need of support but eliminated</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_nottobeconsideredforsupport2.png" /></td><td>not to be considered for support</td></tr></table>': cluster_vtc_01_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:true}).addTo(map);
+	L.control.layers(baseMaps,{'<img src="legend/counties_2.png" /> counties': layer_counties_2,'vtc_03<br /><table><tr><td style="text-align: center;"><img src="legend/vtc_03_1_green0.png" /></td><td>green</td></tr><tr><td style="text-align: center;"><img src="legend/vtc_03_1_orange1.png" /></td><td>orange</td></tr><tr><td style="text-align: center;"><img src="legend/vtc_03_1_red2.png" /></td><td>red</td></tr></table>': layer_vtc_03_1,"OpenStreetMap": layer_OpenStreetMap_0,}).addTo(map);
 	setBounds();
-	var i = 0;
-	all_data.eachLayer(function(layer) {
-		var context = {
-			feature: layer.feature,
-			variables: {}
+	map.addControl(new L.Control.Search({
+		layer: layer_vtc_03_1,
+		initial: false,
+		hideMarkerOnCollapse: true,
+		propertyName: 'name'}));
+	document.getElementsByClassName('search-button')[0].className +=
+	 ' fa fa-binoculars';
+	var mapDiv = document.getElementById('map');
+	var row = document.createElement('div');
+	row.className="row";
+	row.id="all";
+	row.style.height = "100%";
+	var col1 = document.createElement('div');
+	col1.className="col9";
+	col1.id = "mapWindow";
+	col1.style.height = "99%";
+	col1.style.width = "80%";
+	col1.style.display = "inline-block";
+	var col2 = document.createElement('div');
+	col2.className="col3";
+	col2.id = "menu";
+	col2.style.display = "inline-block";
+	mapDiv.parentNode.insertBefore(row, mapDiv);
+	document.getElementById("all").appendChild(col1);
+	document.getElementById("all").appendChild(col2);
+	col1.appendChild(mapDiv)
+	var Filters = {"county": "str"};
+	function filterFunc() {
+	  map.eachLayer(function(lyr){
+	  if ("options" in lyr && "dataVar" in lyr["options"]){
+		features = this[lyr["options"]["dataVar"]].features.slice(0);
+		try{
+		  for (key in Filters){
+			keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+			if (Filters[key] == "str" || Filters[key] == "bool"){
+			  var selection = [];
+			  var options = document.getElementById("sel_" + keyS).options
+			  for (var i=0; i < options.length; i++) {
+				if (options[i].selected) selection.push(options[i].value);
+			  }
+				try{
+				  if (key in features[0].properties){
+					for (i = features.length - 1;
+					  i >= 0; --i){
+					  if (selection.indexOf(
+					  features[i].properties[key])<0
+					  && selection.length>0) {
+					  features.splice(i,1);
+					  }
+					}
+				  }
+				} catch(err){
+			  }
+			}
+			if (Filters[key] == "int"){
+			  sliderVals =  document.getElementById(
+				"div_" + keyS).noUiSlider.get();
+			  try{
+				if (key in features[0].properties){
+				for (i = features.length - 1; i >= 0; --i){
+				  if (parseInt(features[i].properties[key])
+					  < sliderVals[0]
+					  || parseInt(features[i].properties[key])
+					  > sliderVals[1]){
+						features.splice(i,1);
+					  }
+					}
+				  }
+				} catch(err){
+				}
+			  }
+			if (Filters[key] == "real"){
+			  sliderVals =  document.getElementById(
+				"div_" + keyS).noUiSlider.get();
+			  try{
+				if (key in features[0].properties){
+				for (i = features.length - 1; i >= 0; --i){
+				  if (features[i].properties[key]
+					  < sliderVals[0]
+					  || features[i].properties[key]
+					  > sliderVals[1]){
+						features.splice(i,1);
+					  }
+					}
+				  }
+				} catch(err){
+				}
+			  }
+			if (Filters[key] == "date"
+			  || Filters[key] == "datetime"
+			  || Filters[key] == "time"){
+			  try{
+				if (key in features[0].properties){
+				  HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+				  startdate = document.getElementById("dat_" +
+					HTMLkey + "_date1").value.replace(" ", "T");
+				  enddate = document.getElementById("dat_" +
+					HTMLkey + "_date2").value.replace(" ", "T");
+				  for (i = features.length - 1; i >= 0; --i){
+					if (features[i].properties[key] < startdate
+					  || features[i].properties[key] > enddate){
+					  features.splice(i,1);
+					}
+				  }
+				}
+			  } catch(err){
+			  }
+			}
+		  }
+		} catch(err){
+		}
+	  this[lyr["options"]["layerName"]].clearLayers();
+	  this[lyr["options"]["layerName"]].addData(features);
+	  }
+	  })
+	}
+		document.getElementById("menu").appendChild(
+			document.createElement("div"));
+		var div_county = document.createElement('div');
+		div_county.id = "div_county";
+		div_county.className= "filterselect";
+		document.getElementById("menu").appendChild(div_county);
+		sel_county = document.createElement('select');
+		sel_county.multiple = true;
+		sel_county.size = 5;
+		sel_county.id = "sel_county";
+		var county_options_str = "<option value='' unselected></option>";
+		sel_county.onchange = function(){filterFunc()};
+		county_options_str  += '<option value="Homabay">Homabay</option>';
+		county_options_str  += '<option value="Migori">Migori</option>';
+		county_options_str  += '<option value="Siaya">Siaya</option>';
+		county_options_str  += '<option value="Vihiga">Vihiga</option>';
+		county_options_str  += '<option value="kisumu">kisumu</option>';
+		sel_county.innerHTML = county_options_str;
+		div_county.appendChild(sel_county);
+		var lab_county = document.createElement('div');
+		lab_county.innerHTML = 'county';
+		lab_county.className = 'filterlabel';
+		div_county.appendChild(lab_county);
+		var reset_county = document.createElement('div');
+		reset_county.innerHTML = 'clear filter';
+		reset_county.className = 'filterlabel';
+		reset_county.onclick = function() {
+			var options = document.getElementById("sel_county").options;
+			for (var i=0; i < options.length; i++) {
+				options[i].selected = false;
+			}
+			filterFunc();
 		};
-		layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Chilanka\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_vtc_01_1'});
-		labels.push(layer);
-		totalMarkers += 1;
-		  layer.added = true;
-		  addLabel(layer, i);
-		  i++;
-	});
-	resetLabels([all_data]);
-	map.on("zoomend", function(){
-		resetLabels([all_data]);
-	});
-	map.on("layeradd", function(){
-		resetLabels([all_data]);
-	});
-	map.on("layerremove", function(){
-		resetLabels([all_data]);
-	});
-
-
-
-    });
-
-	// end of json layers end end end end end end end end end end end end
-
-	
-
-
-
-	// var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-	// 	spiderfyDistanceMultiplier: 2});
-	// cluster_vtc_01_1.addLayer(all_data);
-
-	// bounds_group.addLayer(all_data);
-	// cluster_vtc_01_1.addTo(map);
-	// var osmGeocoder = new L.Control.Geocoder({
-	// 	collapsed: true,
-	// 	position: 'topright',
-	// 	text: 'Search',
-	// 	title: 'Testing'
-	// }).addTo(map);
-
-
-
-
-	// document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-	// .className += ' fa fa-search';
-	// document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-	// .title += 'Search for a place';
-	// var baseMaps = {};
-	// L.control.layers(baseMaps,{'vtc_01<br /><table><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_qualifyingforsupport0.png" /></td><td>qualifying for support</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_needofsupportbuteliminated1.png" /></td><td>need of support but eliminated</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_nottobeconsideredforsupport2.png" /></td><td>not to be considered for support</td></tr></table>': cluster_vtc_01_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:true}).addTo(map);
-	// setBounds();
-	// var i = 0;
-	// all_data.eachLayer(function(layer) {
-	// 	var context = {
-	// 		feature: layer.feature,
-	// 		variables: {}
-	// 	};
-	// 	layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Chilanka\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_vtc_01_1'});
-	// 	labels.push(layer);
-	// 	totalMarkers += 1;
-	// 	  layer.added = true;
-	// 	  addLabel(layer, i);
-	// 	  i++;
-	// });
-	// resetLabels([all_data]);
-	// map.on("zoomend", function(){
-	// 	resetLabels([all_data]);
-	// });
-	// map.on("layeradd", function(){
-	// 	resetLabels([all_data]);
-	// });
-	// map.on("layerremove", function(){
-	// 	resetLabels([all_data]);
-	// });
-	// // console.log(json_layer.features.length)
-
-
-
-	// function filter_(json){
-    //         var att = json.properties.county;
-    //         console.log(att)
-	// 		var optfilter = $("input[name=my_filter]:checked").val();
-
-	// 		// console.log(optfilter)
-    //         if (optfilter == 'ALL'){
-	// 			return true;
-	// 		} 
-	// 		if (optfilter == 'kisumu'){
-	// 			return json.properties['county'] == kisumu;
-	// 		}
-
-	// 		else 
-	// 		{
-    //             // console.log(optfilter)
-    //             return att.status == optfilter;
-    //             // return feature.properties.county == optfilter;
-    //         }
-    //     }
-
-    //     $("input[name=my_filter]").click(function(){
-    //         my_ids = [];
-    //         json_layer.refresh();
-	// 	});
-		
-	// 	marker.on('click', function(ev){
-	// 		var latlng = map.mouseEventToLatLng(ev.originalEvent);
-	// 		console.log(latlng.lat + ', ' + latlng.lng);
-	// 	});
-
-	// inserting sums into html
-	
+		div_county.appendChild(reset_county);
 	</script>
 </body>
 <!-- <script src="../assets/js/core/jquery.3.2.1.min.js"></script> -->
