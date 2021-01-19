@@ -273,6 +273,10 @@
 					<img class="card-img-top" windth=100% height="200px" src='+feature.properties['image_url1']+'> \
 				</tr>\
 				<tr>\
+                        <th scope="row">name</th>\
+                        <td>' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+				<tr>\
 					<th scope="row">county</th>\
 					<td>' + (feature.properties['county'] !== null ? autolinker.link(feature.properties['county'].toLocaleString()) : '') + '</td>\
 				</tr>\
