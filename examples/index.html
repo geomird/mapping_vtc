@@ -35,9 +35,9 @@
 
 </head>
 <body>
-	<!-- <div class="wrapper"> -->
-		<!-- <div class="main-header"> -->
-			<!-- <div class="logo-header">
+	<div class="wrapper">
+		<div class="main-header">
+			 <div class="logo-header">
 				<a href="index.html" class="logo">
 					Mapping VTC
 				</a>
@@ -46,11 +46,11 @@
 				</button>
 				<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
 			</div>
-			 -->
+
 			</div>
-			<!-- <div class="sidebar"> -->
-				<!-- <div class="scrollbar-inner sidebar-wrapper"> -->
-					<!-- <ul class="nav"> -->
+			<div class="sidebar">
+				<div class="scrollbar-inner sidebar-wrapper">
+					<ul class="nav">
 						
 
 						<!-- our toggle buttons -->
@@ -60,21 +60,23 @@
 
 
 						<!-- my images should occupy this area -->
+						
 
 
-						<!-- <li class="nav-item active">
+						<li class="nav-item active">
 							<a href="index.html">
 								<i class="la la-dashboard"></i>
-								<p>Dashboard</p>
-								<span class="badge badge-count">5</span>
+								
+								<b>Name:</b><div class="nome"></div>
+								<!-- <span class="badge badge-count">5</span> -->
 							</a>
-						</li> -->
+						</li>
 						
-					<!-- </ul> -->
-				<!-- </div> -->
-			<!-- </div> -->
+					</ul>
+				</div>
+			</div>
 			
-			<!-- <div class="main-panel"> -->
+			<div class="main-panel">
 				<div class="content">
 					<div class="container-fluid">
 						<h4 class="page-title">Dashboard</h4>
@@ -91,7 +93,7 @@
 											<div class="col-7 d-flex align-items-center">
 												<div class="numbers">
 													<p class="card-category">Need of support but eliminated</p>
-													<h4 class="card-title" id="need">6</h4>
+													<h4 class="card-title" id="need">7</h4>
 												</div>
 											</div>
 										</div>
@@ -177,9 +179,9 @@
 						</div>				
 					</div>
 				</footer>
-			<!-- </div> -->
-		<!-- </div> -->
-	<!-- </div> -->
+			</div>
+		</div>
+	</div>
 	<script src="js/qgis2web_expressions.js"></script>
 	<script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
 	<script src="js/leaflet.rotatedMarker.js"></script>
@@ -195,6 +197,7 @@
 	<script src="js/tailDT.js"></script>
 <script src="js/nouislider.min.js"></script>
 <script src="js/wNumb.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 	<script src="data/vtc_03_1.js"></script>
 	<script src="data/counties_2.js"></script>
 	<script>
@@ -267,6 +270,11 @@
 				}
 			},
 			mouseover: highlightFeature,
+			click: function(e){
+				$(".nome").html(feature.properties.image_url1);
+				// $(".nome").html(feature.properties.name);
+
+			},
 		});
 		var popupContent = '<table>\
 			<tr>\
