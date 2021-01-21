@@ -234,11 +234,13 @@
      <script src="../js/leaflet.ajax.js"></script>
 	<script src="../data/vtc_01_1.js"></script>
 	<script src="../data/json_d.json"></script>
+	<script src="../data/county.geojson"></script>
 	<script src="../assets/js/search.js"></script>
 	<script>
 	var imagescollection = [];
 	var items = [];
 	var highlightLayer;
+	
 	function highlightFeature(e) {
 		highlightLayer = e.target;
 
@@ -408,7 +410,7 @@
 			},
 			
 		});
-		// <img src='"+entry[0]+"&previewImage=true'</img>
+		
 		var popupContent =
 		 '<table>\
 				<tr>\
@@ -503,42 +505,42 @@
 	map.getPane('pane_vtc_01_1').style['mix-blend-mode'] = 'normal';
 
 
+	function style_counties_2_0() {
+		return {
+			pane: 'pane_counties_2',
+			opacity: 1,
+			color: 'rgba(188,35,35,1.0)',
+			dashArray: '',
+			lineCap: 'butt',
+			lineJoin: 'miter',
+			weight: 1.0, 
+			fill: true,
+			fillOpacity: 1,
+			fillColor: 'rgba(213,180,60,0.0)',
+			interactive: false,
+		}
+	}
+	map.createPane('pane_counties_2');
+	map.getPane('pane_counties_2').style.zIndex = 402;
+	map.getPane('pane_counties_2').style['mix-blend-mode'] = 'normal';
+	var layer_counties_2 = new L.geoJson(json_counties_2, {
+		attribution: '',
+		interactive: false,
+		dataVar: 'json_counties_2',
+		layerName: 'layer_counties_2',
+		pane: 'pane_counties_2',
+		// onEachFeature: pop_counties_2,
+		style: style_counties_2_0,
+	});
+	bounds_group.addLayer(layer_counties_2);
+	map.addLayer(layer_counties_2);
+
+
 	// data is loaded at this point
 
-	// var layer_vtc_01_1 = new L.geoJson(json_vtc_01_1, {
-	// 	attribution: '',
-	// 	interactive: true,
-	// 	dataVar: 'json_vtc_01_1',
-	// 	layerName: 'layer_vtc_01_1',
-	// 	pane: 'pane_vtc_01_1',
-	// 	onEachFeature: pop_vtc_01_1,
-	// 	pointToLayer: function (feature, latlng) {
-	// 		var context = {
-	// 			feature: feature,
-	// 			variables: {}
-	// 		};
-	// 		return L.shapeMarker(latlng, style_vtc_01_1_0(feature));
-	// 	},
-	// });
+	
 
-	// using ajax
 
-	// var json_layer = new L.geoJSON.ajax('../data/county.geojson', {
-    //         attribution: 'geomird',
-    //         interactive: true,
-            // dataVar: 'json_vtc_01_1',
-            // layerName: 'layer_vtc_01_1',
-            // pane: 'pane_vtc_01_1',
-            // onEachFeature: pop_vtc_01_1,
-            // pointToLayer: function (feature, latlng) {
-            //     var context = {
-            //         feature: feature,
-            //         variables: {}
-            //     };
-            //     return L.shapeMarker(latlng, );
-            // }
-		// }).addTo(map)
-	// 	console.log(json_layer)
 
 
 	var promise = $.getJSON("../data/json_d.json");
@@ -675,12 +677,7 @@
             padding: [50, 50]
 		});
 		all_data.addTo(map)
-        // kisumu.addTo(map)
-        // Siaya.addTo(map)
-        // homabay.addTo(map)
-        // vihiga.addTo(map)
-        // migori.addTo(map)
-        // The JavaScript below is new
+        
         $("#kisumu").click(function() {
 			map.fitBounds([[0.063171, 34.439392],[-0.475153, 35.218048]]);
             map.addLayer(kisumu)
@@ -739,18 +736,7 @@
 			map.removeLayer(vihiga)
 		});
 		
-	// 	var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-	// 	spiderfyDistanceMultiplier: 2});
-	// cluster_vtc_01_1.addLayer(all_data);
-
-	// bounds_group.addLayer(all_data);
-	// cluster_vtc_01_1.addTo(map);
-	// var osmGeocoder = new L.Control.Geocoder({
-	// 	collapsed: true,
-	// 	position: 'topright',
-	// 	text: 'Search',
-	// 	title: 'Testing'
-	// }).addTo(map);
+	
 
 	// search controls
 	L.Control.search({
@@ -783,7 +769,8 @@
 	document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
 	.title += 'Search for a place';
 	var baseMaps = {};
-	L.control.layers(baseMaps,{'vtc_01<br /><table><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_qualifyingforsupport0.png" /></td><td>qualifying for support</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_needofsupportbuteliminated1.png" /></td><td>need of support but eliminated</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_nottobeconsideredforsupport2.png" /></td><td>not to be considered for support</td></tr></table>': cluster_vtc_01_1,"OpenStreetMap": layer_OpenStreetMap_0,"Esri Imagery":arcon},{collapsed:true}).addTo(map);
+	L.control.layers(baseMaps,{'vtc_01<br /><table><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_qualifyingforsupport0.png" /></td><td>qualifying for support</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_needofsupportbuteliminated1.png" /></td><td>need of support but eliminated</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_nottobeconsideredforsupport2.png" /></td><td>not to be considered for support</td></tr></table>': cluster_vtc_01_1,
+	'counties':layer_counties_2,"OpenStreetMap": layer_OpenStreetMap_0,"Esri Imagery":arcon},{collapsed:true}).addTo(map);
 	setBounds();
 	var i = 0;
 	all_data.eachLayer(function(layer) {
@@ -813,94 +800,7 @@
 
     });
 
-	// end of json layers end end end end end end end end end end end end
 
-	
-
-
-
-	// var cluster_vtc_01_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
-	// 	spiderfyDistanceMultiplier: 2});
-	// cluster_vtc_01_1.addLayer(all_data);
-
-	// bounds_group.addLayer(all_data);
-	// cluster_vtc_01_1.addTo(map);
-	// var osmGeocoder = new L.Control.Geocoder({
-	// 	collapsed: true,
-	// 	position: 'topright',
-	// 	text: 'Search',
-	// 	title: 'Testing'
-	// }).addTo(map);
-
-
-
-
-	// document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-	// .className += ' fa fa-search';
-	// document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
-	// .title += 'Search for a place';
-	// var baseMaps = {};
-	// L.control.layers(baseMaps,{'vtc_01<br /><table><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_qualifyingforsupport0.png" /></td><td>qualifying for support</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_needofsupportbuteliminated1.png" /></td><td>need of support but eliminated</td></tr><tr><td style="text-align: center;"><img src="../legend/vtc_01_1_nottobeconsideredforsupport2.png" /></td><td>not to be considered for support</td></tr></table>': cluster_vtc_01_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:true}).addTo(map);
-	// setBounds();
-	// var i = 0;
-	// all_data.eachLayer(function(layer) {
-	// 	var context = {
-	// 		feature: layer.feature,
-	// 		variables: {}
-	// 	};
-	// 	layer.bindTooltip((layer.feature.properties['name'] !== null?String('<div style="color: #000000; font-size: 10pt; font-family: \'Chilanka\', sans-serif;">' + layer.feature.properties['name']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_vtc_01_1'});
-	// 	labels.push(layer);
-	// 	totalMarkers += 1;
-	// 	  layer.added = true;
-	// 	  addLabel(layer, i);
-	// 	  i++;
-	// });
-	// resetLabels([all_data]);
-	// map.on("zoomend", function(){
-	// 	resetLabels([all_data]);
-	// });
-	// map.on("layeradd", function(){
-	// 	resetLabels([all_data]);
-	// });
-	// map.on("layerremove", function(){
-	// 	resetLabels([all_data]);
-	// });
-	// // console.log(json_layer.features.length)
-
-
-
-	// function filter_(json){
-    //         var att = json.properties.county;
-    //         console.log(att)
-	// 		var optfilter = $("input[name=my_filter]:checked").val();
-
-	// 		// console.log(optfilter)
-    //         if (optfilter == 'ALL'){
-	// 			return true;
-	// 		} 
-	// 		if (optfilter == 'kisumu'){
-	// 			return json.properties['county'] == kisumu;
-	// 		}
-
-	// 		else 
-	// 		{
-    //             // console.log(optfilter)
-    //             return att.status == optfilter;
-    //             // return feature.properties.county == optfilter;
-    //         }
-    //     }
-
-    //     $("input[name=my_filter]").click(function(){
-    //         my_ids = [];
-    //         json_layer.refresh();
-	// 	});
-		
-	// 	marker.on('click', function(ev){
-	// 		var latlng = map.mouseEventToLatLng(ev.originalEvent);
-	// 		console.log(latlng.lat + ', ' + latlng.lng);
-	// 	});
-
-	// inserting sums into html
 	
 	</script>
 </body>
@@ -908,14 +808,14 @@
 <script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
-<script src="../assets/js/plugin/chartist/chartist.min.js"></script>
-<script src="../assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
+<!-- <script src="../assets/js/plugin/chartist/chartist.min.js"></script> -->
+<!-- <script src="../assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script> -->
 <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 <script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 <script src="../assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
 <script src="../assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="../assets/js/plugin/chart-circle/circles.min.js"></script>
+<!-- <script src="../assets/js/plugin/chart-circle/circles.min.js"></script> -->
 <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <script src="../assets/js/ready.min.js"></script>
-<script src="../assets/js/demo.js"></script>
+<!-- <script src="../assets/js/demo.js"></script> -->
 </html>
