@@ -88,7 +88,7 @@
 											<div class="col-7 d-flex align-items-center">
 												<div class="numbers">
 													<p class="card-category">Need of support but eliminated</p>
-													<h4 class="card-title" id="need">7</h4>
+													<h4 class="card-title" id="need">6</h4>
 												</div>
 											</div>
 										</div>
@@ -166,32 +166,17 @@
 						</div>
 
 
-						<!-- <div class="input-group">
-							<input type="radio"  name="my_filter" value="ALL" checked>ALL
-							<input type="radio"  name="my_filter" value="kisumu" >kisumu
-							<input type="radio"  name="my_filter" value="Siaya" >siaya
-							<div class="input-group">
-								<div class="input-group-prepend">
-								  <div class="input-group-text">
-								  <input type="radio" aria-label="Radio button for following text input">
-								  </div>
-								</div>
-								<input type="radio" class="form-control" aria-label="Text input with radio button">ALL
-							  </div> -->
-
-							  <!-- <div class="input-group">
-								<div class="input-group-prepend">
-								  <div class="input-group-text">
-								  <input type="radio" aria-label="Radio button for following text input">
-								  </div>
-								</div>
-								<input type="radio" name="my_filter" value="kisumu" aria-label="Text input with radio button">kisumu
-							  </div> -->
+						
 						</div>
 						
 						
 					</div>
 				</div>
+
+
+				<!-- here is our footer -->
+
+
 				<footer class="footer">
 					<div class="container-fluid">
 						<nav class="pull-left">
@@ -209,9 +194,15 @@
 						</div>				
 					</div>
 				</footer>
+
+				<!-- end of footer -->
+
 			</div>
 		</div>
 	</div>
+	
+	<!-- javascript imports for the basic structure of the website -->
+
 	<script src="../assets/js/underscore-min.js"></script>
 	<script src="../assets/js/core/jquery.3.2.1.min.js"></script>
 	<script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
@@ -236,6 +227,9 @@
 	<script src="../data/json_d.json"></script>
 	<script src="../data/county.geojson"></script>
 	<script src="../assets/js/search.js"></script>
+
+	<!-- map script starts herer -->
+
 	<script>
 	var imagescollection = [];
 	var items = [];
@@ -523,25 +517,23 @@
 	map.createPane('pane_counties_2');
 	map.getPane('pane_counties_2').style.zIndex = 402;
 	map.getPane('pane_counties_2').style['mix-blend-mode'] = 'normal';
+
+	// loading the counties layer and adding it to the map
+
 	var layer_counties_2 = new L.geoJson(json_counties_2, {
 		attribution: '',
 		interactive: false,
 		dataVar: 'json_counties_2',
 		layerName: 'layer_counties_2',
 		pane: 'pane_counties_2',
-		// onEachFeature: pop_counties_2,
+		
 		style: style_counties_2_0,
 	});
 	bounds_group.addLayer(layer_counties_2);
 	map.addLayer(layer_counties_2);
 
 
-	// data is loaded at this point
-
-	
-
-
-
+	// vtc data is loaded at this point using javascript promise to enable filtering by county
 
 	var promise = $.getJSON("../data/json_d.json");
         promise.then(function(data) {
@@ -566,7 +558,7 @@
 					dataVar: 'json_vtc_01_1',
 					layerName: 'layer_vtc_01_1',
 					pane: 'pane_vtc_01_1',
-					// onEachFeature: pop_vtc_01_1,
+					
             filter: function(feature, layer) {
                 return feature.properties.county == "kisumu";
             },
@@ -741,9 +733,7 @@
 	// search controls
 	L.Control.search({
 	    data: items,
-	    // moveToLocation: function(latlng, title, map) {
-        // 	map.setView(latlng, 7);    // set the zoom
-    	// }
+	    
 	 }).addTo(map);
 
 
@@ -808,14 +798,13 @@
 <script src="../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script src="../assets/js/core/popper.min.js"></script>
 <script src="../assets/js/core/bootstrap.min.js"></script>
-<!-- <script src="../assets/js/plugin/chartist/chartist.min.js"></script> -->
-<!-- <script src="../assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script> -->
+
 <script src="../assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
 <script src="../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 <script src="../assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
 <script src="../assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<!-- <script src="../assets/js/plugin/chart-circle/circles.min.js"></script> -->
+
 <script src="../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
 <script src="../assets/js/ready.min.js"></script>
-<!-- <script src="../assets/js/demo.js"></script> -->
+
 </html>
